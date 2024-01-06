@@ -1,3 +1,8 @@
+/* 
+  @description: 치지직 비디오 단축키 제어
+  본 프로그램은 PIP모드에서도 작동합니다.
+ */
+// @auth: Clann
 // 1. k - play/pause
 // 2. m - mute/unmute
 // 3. t - toggle watching mode
@@ -7,7 +12,7 @@
 // pzp-button pzp-pc-volume-button pzp-pc__volume-button pzp-pc-ui-button pzp-pc-ui-button--clicked
 // pzp-button pzp-pc-viewmode-button pzp-pc__viewmode-button pzp-pc-ui-button pzp-pc-ui-button--clicked
 
-console.log("videoControl.js is loaded _ by Clann");
+console.log("videoControl.js is loaded");
 
 // 이벤트 등록
 
@@ -18,10 +23,10 @@ console.log("videoControl.js is loaded _ by Clann");
   const createShortcut = () => {
     document.addEventListener("keydown", (e) => {
       // error handling
-      if (!e.target.classList.contains("pzp")) {
-        // console.error("pzp가 아닙니다.");
-        return;
-      }
+      const isShortCutUnableTags = ["INPUT", "TEXTAREA", "SELECT", "PRE"];
+      const isShortCut1 = e.ctrlKey || e.altKey || e.shiftKey || e.metaKey;
+      const isShortCut2 = !isShortCutUnableTags.includes(e.target.tagName.toUpperCase());
+      if (isShortCut1 || !isShortCut2) return;
 
       // 1. play/pause 버튼을 클릭함
       if (e.key === "k" || e.key === "K") {
@@ -55,10 +60,11 @@ console.log("videoControl.js is loaded _ by Clann");
   // 2. 포커스
   const focusVideo = () => {
     const video = document.querySelector(".pzp-pc");
+    video.click();
     video.focus();
   };
 
   // 실행단
   createShortcut();
-  delay(1000).then(() => focusVideo());
+  delay(1500).then(() => focusVideo());
 })();
