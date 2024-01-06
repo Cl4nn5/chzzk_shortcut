@@ -12,7 +12,7 @@
 // pzp-button pzp-pc-volume-button pzp-pc__volume-button pzp-pc-ui-button pzp-pc-ui-button--clicked
 // pzp-button pzp-pc-viewmode-button pzp-pc__viewmode-button pzp-pc-ui-button pzp-pc-ui-button--clicked
 
-console.log("videoControl.js is loaded");
+console.log("%cvideoControl.js is loaded", "color: #00ff00");
 
 // 이벤트 등록
 
@@ -44,6 +44,10 @@ console.log("videoControl.js is loaded");
 
       // 3. toggle watching mode 버튼을 클릭함
       if (e.key === "t" || e.key === "T") {
+        // spcial case: PIP mode
+        const isLive = window.location.href.includes("live");
+        if (!isLive) return;
+
         const viewModeToggleBtn = document.querySelector(".pzp-pc-viewmode-button");
         viewModeToggleBtn.click();
         return;
@@ -60,7 +64,6 @@ console.log("videoControl.js is loaded");
   // 2. 포커스
   const focusVideo = () => {
     const video = document.querySelector(".pzp-pc");
-    video.click();
     video.focus();
   };
 
