@@ -18,7 +18,6 @@ console.log("%cvideoControl.js is loaded", "color: #00ff00");
 
 (function () {
   const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
-  const isLive = window.location.href.includes("live");
 
   // 1. 단축키
   const createShortcut = () => {
@@ -46,6 +45,7 @@ console.log("%cvideoControl.js is loaded", "color: #00ff00");
       // 3. toggle watching mode 버튼을 클릭함
       if (e.key === "t" || e.key === "T") {
         // spcial case: PIP mode
+        const isLive = window.location.href.includes("live");
         if (!isLive) return;
 
         const viewModeToggleBtn = document.querySelector(".pzp-pc-viewmode-button");
@@ -66,6 +66,7 @@ console.log("%cvideoControl.js is loaded", "color: #00ff00");
     if (!isLive) return;
 
     const video = document.querySelector(".pzp-pc");
+    const isLive = window.location.href.includes("live");
     video.focus();
   };
 
