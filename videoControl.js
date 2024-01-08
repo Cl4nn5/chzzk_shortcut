@@ -63,10 +63,10 @@ console.log("%cvideoControl.js is loaded", "color: #00ff00");
   };
   // 2. 포커스
   const focusVideo = () => {
+    const isLive = window.location.href.includes("live");
     if (!isLive) return;
 
     const video = document.querySelector(".pzp-pc");
-    const isLive = window.location.href.includes("live");
     video.focus();
   };
 

@@ -1,0 +1,5 @@
+.pzp-button {}
+.pzp-button.pzp-pc-playback-switch > span.pzp-pc-ui-button__tooltip--top::after { content: "(k)"; }
+.pzp-button.pzp-pc-volume-button > span.pzp-pc-ui-button__tooltip--top::after { content: "(m)"; }
+.pzp-button.pzp-pc-viewmode-button > span.pzp-pc-ui-button__tooltip--top::after { content: "(t)"; }
+.pzp-button.pzp-pc-fullscreen-button > span.pzp-pc-ui-button__tooltip--top::after { content: "(f)"; }
