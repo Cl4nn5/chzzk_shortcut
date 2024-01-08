@@ -46,7 +46,10 @@ console.log("%cvideoControl.js is loaded", "color: #00ff00");
       if (e.key === "t" || e.key === "T") {
         // spcial case: PIP mode
         const isLive = window.location.href.includes("live");
-        if (!isLive) return;
+        const isVideo = window.location.href.includes("video");
+        // live일 때: 작동
+        // video일 때: 작동
+        if (!isLive && !isVideo) return;
 
         const viewModeToggleBtn = document.querySelector(".pzp-pc-viewmode-button");
         viewModeToggleBtn.click();
