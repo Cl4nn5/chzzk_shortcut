@@ -12,10 +12,10 @@
         "https://chzzk.naver.com/*"
       ],
       "css": [
-        "videoControl.css"
+        "web/contents.css"
       ],
       "js": [
-        "videoControl.js"
+        "web/contents.js"
       ]
     }
   ]
