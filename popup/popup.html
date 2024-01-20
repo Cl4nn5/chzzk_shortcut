@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link type="text/css" rel="stylesheet" href="popup.css" />
+  </head>
+  <body>
+    <!-- 
+      * 단축키
+        1. 단축키 적용 여부
+        2. 단축키 키설정
+        3. 단축키 UI 표기 여부
+      TODO: 썸네일 미리보기
+      TODO: 방향키 탐색
+     -->
+    <div class="container">
+      <div class="card">
+        <div class="title">단축키</div>
+        <div class="row">
+          <label for="useShortcut">단축키 적용 여부</label>
+          <input type="checkbox" id="useShortcut" />
+        </div>
+        <div class="row">
+          <details id="shortcutKey" class="shortcut-detail" open>
+            <summary>단축키 키설정</summary>
+            <div class="box">
+              <div class="row">
+                <label for="playPause">재생/일시정지</label>
+                <input type="text" id="playPause" value="k" />
+              </div>
+              <div class="row">
+                <label for="muteUnmute">음소거/음소거 해제</label>
+                <input type="text" id="muteUnmute" value="m" />
+              </div>
+              <div class="row">
+                <label for="changeViewMode">화면 전환</label>
+                <input type="text" id="changeViewMode" value="t" />
+              </div>
+              <div class="row">
+                <label for="fullScreen">전체 화면</label>
+                <input type="text" id="fullScreen" value="f" />
+              </div>
+            </div>
+          </details>
+        </div>
+        <div class="row">
+          <label for="shortcut-ui">단축키 UI 표기 여부</label>
+          <input type="checkbox" id="shortcut-ui" />
+        </div>
+      </div>
+    </div>
+
+    <script src="popup.js"></script>
+  </body>
+</html>

@@ -13,10 +13,10 @@
         "https://game.naver.com/esports/*"
       ],
       "css": [
-        "videoControl.css"
+        "web/contents.css"
       ],
       "js": [
-        "videoControl.js"
+        "web/contents.js"
       ]
     }
   ]
