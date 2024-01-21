@@ -18,7 +18,7 @@ console.log("%cvideoControl.js is loaded", "color: #00ff00");
 // 이벤트 등록
 
 (function () {
-  const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+  const delay = async (s = 1) => await new Promise((r) => setTimeout(r, s * 1000));
   const adSkipCount = 3;
   const shortCutKey_playPause = ["k", "K"];
   const shortCutKey_muteUnmute = ["m", "M"];
@@ -81,6 +81,7 @@ console.log("%cvideoControl.js is loaded", "color: #00ff00");
 
       // 5. search 버튼을 클릭함
       if (shortCutKey_search.includes(e.key)) {
+        e.preventDefault();
         const searchBtn = document.querySelector(".search_input__tKVgq");
         searchBtn.focus();
         return;
@@ -88,6 +89,7 @@ console.log("%cvideoControl.js is loaded", "color: #00ff00");
 
       // 6. chat 버튼을 클릭함
       if (shortCutKey_chat.includes(e.key)) {
+        e.preventDefault();
         const chatBtn = document.querySelector(".live_chatting_input_input__2F3Et");
         chatBtn.focus();
         return;
@@ -111,42 +113,38 @@ console.log("%cvideoControl.js is loaded", "color: #00ff00");
       }
     });
   };
-  // 2. 광고 스킵
-  // 1초단위로 광고스킵 5번 시도 try Catch
-  const skipAd = async (delayTime = 1000) => {
+  // 2-1. 광고 스킵
+  const skipAd = async (s = 1) => {
+    await delay(s);
     const btnSkip = document.querySelector(".btn_skip");
     if (!btnSkip) return;
-    await delay(delayTime);
-    console.log("광고를 스킵합니다.1");
     btnSkip.click();
-    console.log("광고를 스킵합니다.2");
   };
-  const trySkipAd = async () => {
-    let tryCount = 0;
-    try {
-      while (tryCount < adSkipCount) {
-        await delay(1000);
-        skipAd();
-        tryCount++;
-      }
 
-      console.log("광고 스킵을 종료합니다.");
-    } catch (error) {
-      console.log(error);
+  // 2-2. 광고 스킵 반복
+  const repeatSkipAd = async (tryCount = adSkipCount) => {
+    for (let i = 0; i < tryCount; i++) {
+      await delay();
+      skipAd();
+      console.log("광고 스킵을 시도합니다.", i + 1, "/", tryCount);
     }
+  };
+
+  // 2-3. 광고 스킵 이벤트 등록
+  const addSkipAdEvent = () => {
+    window.addEventListener("popstate", () => {
+      skipAd();
+    });
+
+    window.addEventListener("click", async () => {
+      if (isPathnameChanged()) {
+        await repeatSkipAd(2);
+      }
+    });
   };
 
   // 실행단
-  createShortcut();
-  window.addEventListener("popstate", () => {
-    skipAd();
-  });
-
-  window.addEventListener("click", () => {
-    if (isPathnameChanged()) {
-      skipAd();
-    }
-  });
-
-  trySkipAd();
+  createShortcut(); // 단축키
+  addSkipAdEvent(); // 광고 스킵
+  repeatSkipAd(); // 페이지 로드 후 광고 스킵
 })();
