@@ -18,7 +18,8 @@ console.log("%cvideoControl.js is loaded", "color: #00ff00");
 // 이벤트 등록
 
 (function () {
-  const delay = async (s = 1) => await new Promise((r) => setTimeout(r, s * 1000));
+  const delay = async (s = 1) =>
+    await new Promise((r) => setTimeout(r, s * 1000));
   const adSkipCount = 3;
   const shortCutKey_playPause = ["k", "K"];
   const shortCutKey_muteUnmute = ["m", "M"];
@@ -45,7 +46,9 @@ console.log("%cvideoControl.js is loaded", "color: #00ff00");
       // error handling
       const isShortCutUnableTags = ["INPUT", "TEXTAREA", "SELECT", "PRE"];
       const isShortCut1 = e.ctrlKey || e.altKey || e.shiftKey || e.metaKey;
-      const isShortCut2 = !isShortCutUnableTags.includes(e.target.tagName.toUpperCase());
+      const isShortCut2 = !isShortCutUnableTags.includes(
+        e.target.tagName.toUpperCase()
+      );
       if (isShortCut1 || !isShortCut2) return;
 
       // 1. play/pause 버튼을 클릭함
@@ -67,14 +70,18 @@ console.log("%cvideoControl.js is loaded", "color: #00ff00");
         // spcial case: PIP mode
         if (!isVideo() && !isLive()) return;
 
-        const viewModeToggleBtn = document.querySelector(".pzp-pc-viewmode-button");
+        const viewModeToggleBtn = document.querySelector(
+          ".pzp-pc-viewmode-button"
+        );
         viewModeToggleBtn.click();
         return;
       }
 
       // 4. full screen 버튼을 클릭함
       if (shortCutKey_fullScreen.includes(e.key)) {
-        const fullScreenBtn = document.querySelector(".pzp-pc-fullscreen-button");
+        const fullScreenBtn = document.querySelector(
+          ".pzp-pc-fullscreen-button"
+        );
         fullScreenBtn.click();
         return;
       }
@@ -90,7 +97,9 @@ console.log("%cvideoControl.js is loaded", "color: #00ff00");
       // 6. chat 버튼을 클릭함
       if (shortCutKey_chat.includes(e.key)) {
         e.preventDefault();
-        const chatBtn = document.querySelector(".live_chatting_input_input__2F3Et");
+        const chatBtn = document.querySelector(
+          ".live_chatting_input_input__2F3Et"
+        );
         chatBtn.focus();
         return;
       }
@@ -106,11 +115,11 @@ console.log("%cvideoControl.js is loaded", "color: #00ff00");
         return;
       }
 
-      // 8. 광고 스킵
-      if (shoryCutKey_skipAd.includes(e.key)) {
-        skipAd(0);
-        return;
-      }
+      // // 8. 광고 스킵
+      // if (shoryCutKey_skipAd.includes(e.key)) {
+      //   skipAd(0);
+      //   return;
+      // }
     });
   };
   // 2-1. 광고 스킵
@@ -143,8 +152,17 @@ console.log("%cvideoControl.js is loaded", "color: #00ff00");
     });
   };
 
+  // 광고스킵 단축키 등록
+  const addSkipAdShortCut = () => {
+    document.addEventListener("keydown", (e) => {
+      if (shoryCutKey_skipAd.includes(e.key)) {
+        skipAd();
+      }
+    });
+  };
+
   // 실행단
-  createShortcut(); // 단축키
+  // createShortcut(); // 단축키
   addSkipAdEvent(); // 광고 스킵
   repeatSkipAd(); // 페이지 로드 후 광고 스킵
 })();
